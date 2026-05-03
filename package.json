@@ -1,0 +1,36 @@
+{
+  "name": "codex-startup-pressure-test-skill",
+  "version": "0.1.0",
+  "description": "A Codex skill to brutally pressure-test startup ideas.",
+  "license": "MIT",
+  "author": "Francesco Mistero",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kappaemme-git/codex-startup-pressure-test-skill.git"
+  },
+  "homepage": "https://github.com/Kappaemme-git/codex-startup-pressure-test-skill#readme",
+  "bugs": {
+    "url": "https://github.com/Kappaemme-git/codex-startup-pressure-test-skill/issues"
+  },
+  "bin": {
+    "codex-startup-pressure-test-skill": "scripts/install.js"
+  },
+  "files": [
+    "startup-pressure-test",
+    "scripts/install.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "codex",
+    "skill",
+    "startup",
+    "yc",
+    "mvp",
+    "validation",
+    "founder"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
