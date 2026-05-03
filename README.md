@@ -30,7 +30,9 @@ Then restart Codex so it can discover the skill.
 
 ## Usage
 
-After installation, restart Codex and run:
+After installation, restart Codex and use the skill inside Codex prompts.
+
+Basic pressure test:
 
 ```text
 Use $startup-pressure-test to pressure-test this startup idea:
@@ -38,21 +40,55 @@ Use $startup-pressure-test to pressure-test this startup idea:
 A tool that turns local videos into short clips with local captions for indie hackers and creators posting product demos.
 ```
 
-For a specific mode:
+Brutal version:
 
 ```text
-Use $startup-pressure-test to find the first 10 customers for this idea: ...
+Use $startup-pressure-test to brutally test this startup idea:
+
+...
 ```
+
+Problem validation:
 
 ```text
-Use $startup-pressure-test to build a 2-week MVP plan for this idea: ...
+Use $startup-pressure-test to validate whether this idea solves a real problem people pay for:
+
+...
 ```
 
-For a deeper report:
+Competition mapping:
 
 ```text
-Use $startup-pressure-test to do a deep full report on this startup idea: ...
+Use $startup-pressure-test to map the real competition for this idea:
+
+...
 ```
+
+First 10 customers:
+
+```text
+Use $startup-pressure-test to find the first 10 customers for this idea:
+
+...
+```
+
+MVP plan:
+
+```text
+Use $startup-pressure-test to build a 2-week MVP plan for this idea:
+
+...
+```
+
+Deep report:
+
+```text
+Use $startup-pressure-test to do a deep full report on this startup idea:
+
+...
+```
+
+If you only invoke the skill without an idea, it will ask for the startup idea, target customer, and what the customer should do or pay for.
 
 ## Modes
 
