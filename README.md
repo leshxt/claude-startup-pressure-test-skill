@@ -65,7 +65,7 @@ zip -r ../startup-pressure-test.skill .
 Just describe your startup idea or ask for validation. The skill triggers automatically.
 
 ```
-I'm building a telemedicine intermediary that connects German ME/CFS patients 
+I'm building a telemedicine intermediary that connects German cancer patients 
 to EU-licensed physicians whose prescriptions are valid in Germany under EU 
 Directive 2011/24/EU. Pressure-test it.
 ```
