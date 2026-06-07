@@ -1,154 +1,82 @@
-# Codex Startup Pressure Test Skill
+# Claude Startup Pressure Test Skill
 
-A Codex skill to brutally pressure-test startup ideas before you waste time building the wrong thing.
+A Claude-native port of the [Codex Startup Pressure Test Skill](https://github.com/Kappaemme-git/codex-startup-pressure-test-skill) by [@Kappaemme-git](https://github.com/Kappaemme-git).
 
-Give Codex a startup idea and it returns a compact founder-style diagnosis: verdict, scorecard, core assumption, fatal flaws, problem reality, competition, first customer moves, and a 2-week MVP direction.
+Brutally pressure-tests startup ideas using practical early-stage frameworks (Paul Graham / YC style). Returns a compact founder diagnosis: verdict, scorecard, core assumption, fatal flaws, problem reality, competition, first 10 customers, and a 2-week MVP direction.
 
-## What It Does
+## What's different from the Codex original
 
-- Finds the core assumption
-- Exposes fatal flaws
-- Checks if the problem is real
-- Maps current behavior and real competitors
-- Plans first 10 customer moves
-- Defines a 2-week MVP test
-- Gives a direct strong / weak / pivot verdict
+- **Triggering description** rewritten for Claude's skill-matching mechanism (keyword-rich, lists casual phrasings)
+- **Fatal Flaws as table** with `Risk | Severity | Why It Matters | Fast Test` columns
+- **MVP section** splits into explicit `Build` / `Cut` / `Success signal` / `Failure signal`
+- Added `agents/devil-advocate.md` for adversarial counter-analysis (timing trap, distribution delusion, incumbent awakening)
+- `openai.yaml` retained for Codex compatibility if you want to use the same source for both runtimes
 
-## Installation
+## Structure
 
-```bash
-npx --yes codex-startup-pressure-test-skill@latest
 ```
-
-This installs the skill into:
-
-```bash
-~/.codex/skills/startup-pressure-test
+startup-pressure-test/
+├── SKILL.md                    # Main skill definition (frontmatter + instructions)
+├── openai.yaml                 # Codex interface metadata (optional, kept for cross-compat)
+├── references/
+│   ├── playbooks.md            # Mode-specific role framings and checklists
+│   └── scoring-rubric.md       # Expanded 1-5 scoring criteria with threshold logic
+└── agents/
+    └── devil-advocate.md       # Adversarial subagent prompt for brutal mode
 ```
-
-Then restart Codex so it can discover the skill.
-
-## Usage
-
-After installation, restart Codex and use the skill inside Codex prompts.
-
-Basic pressure test:
-
-```text
-Use $startup-pressure-test to pressure-test this startup idea:
-
-A tool that turns local videos into short clips with local captions for indie hackers and creators posting product demos.
-```
-
-Brutal version:
-
-```text
-Use $startup-pressure-test to brutally test this startup idea:
-
-...
-```
-
-Problem validation:
-
-```text
-Use $startup-pressure-test to validate whether this idea solves a real problem people pay for:
-
-...
-```
-
-Competition mapping:
-
-```text
-Use $startup-pressure-test to map the real competition for this idea:
-
-...
-```
-
-First 10 customers:
-
-```text
-Use $startup-pressure-test to find the first 10 customers for this idea:
-
-...
-```
-
-MVP plan:
-
-```text
-Use $startup-pressure-test to build a 2-week MVP plan for this idea:
-
-...
-```
-
-Deep report:
-
-```text
-Use $startup-pressure-test to do a deep full report on this startup idea:
-
-...
-```
-
-If you only invoke the skill without an idea, it will ask for the startup idea, target customer, and what the customer should do or pay for.
 
 ## Modes
 
-- `pressure-test`: core assumption, fatal flaws, direct verdict
-- `problem-validation`: real pain, early adopter, validation criteria
-- `competition-map`: current behavior, direct/indirect competitors, switching cost
-- `first-10-customers`: manual traction plan
-- `mvp-plan`: smallest 2-week MVP test
-- `full`: compact all-in-one diagnosis
+| Mode | Trigger phrases | What it does |
+|---|---|---|
+| `pressure-test` | "pressure-test", "brutal test", "fatal flaws" | Core assumption, fatal flaws, direct verdict |
+| `problem-validation` | "validate", "real problem", "does this solve" | Real pain, early adopter, validation criteria |
+| `competition-map` | "competition", "competitors", "alternatives" | Current behavior, direct/indirect competitors, switching cost |
+| `first-10-customers` | "first customers", "traction", "who would buy" | Manual traction plan, no ads |
+| `mvp-plan` | "MVP", "2-week", "smallest version" | Smallest testable MVP with success/failure signals |
+| `full` | unclear mode, "full report", "everything" | Compact version of all modes (default) |
 
-## Output
+## Installation
 
-Default output is compact:
+### Claude.ai (web/desktop/mobile)
 
-```text
-Verdict
-Scorecard
-Core Assumption
-Fatal Flaws
-Problem Reality
-Competition
-First 10 Customers
-MVP
-```
+1. Download `startup-pressure-test.skill` from the [Releases](../../releases) page (or package it yourself, see below)
+2. In Claude.ai, go to **Settings → Capabilities → Skills**
+3. Click **Upload skill** and select the `.skill` file
+4. The skill will activate automatically when you describe a startup idea or ask for validation
 
-## Manual Installation
+### Claude Code / API
 
-Clone the repository:
+Clone the repo and point your skill directory at it, or copy `startup-pressure-test/` into your existing skills folder.
+
+### Package as `.skill` yourself
 
 ```bash
-git clone https://github.com/Kappaemme-git/codex-startup-pressure-test-skill.git
+# Using Anthropic's skill-creator scripts (if available)
+python -m scripts.package_skill startup-pressure-test
+
+# Or manually zip it
+cd startup-pressure-test
+zip -r ../startup-pressure-test.skill .
 ```
 
-Copy the skill into your Codex skills directory:
+## Usage
 
-```bash
-mkdir -p ~/.codex/skills
-cp -R codex-startup-pressure-test-skill/startup-pressure-test ~/.codex/skills/startup-pressure-test
+Just describe your startup idea or ask for validation. The skill triggers automatically.
+
+```
+I'm building a telemedicine intermediary that connects German ME/CFS patients 
+to EU-licensed physicians whose prescriptions are valid in Germany under EU 
+Directive 2011/24/EU. Pressure-test it.
 ```
 
-Restart Codex.
+For brutal mode, add `deep`, `brutal`, or `give me the full report` to the request.
 
-## Troubleshooting
+## Credits
 
-If Codex does not recognize `$startup-pressure-test`, restart Codex after installing.
-
-Check that the skill exists:
-
-```bash
-ls ~/.codex/skills/startup-pressure-test
-```
-
-You should see:
-
-```text
-SKILL.md
-agents/
-references/
-```
+- Original Codex skill by [@Kappaemme-git](https://github.com/Kappaemme-git)
+- Claude port and structural enhancements by [@leshxt](https://github.com/leshxt) (built collaboratively with Claude)
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE)
